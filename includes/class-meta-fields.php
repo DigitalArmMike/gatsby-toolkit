@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Register our meta fields.
  */
-class LBN_Meta_Fields {
+class GT_Meta_Fields {
 
 	/**
 	 * Kick it off.

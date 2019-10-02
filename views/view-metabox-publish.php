@@ -6,7 +6,7 @@
  */
 
 // Do we have build hooks?
-$lb_netlifly     = get_option( 'lb_netlifly' );
+$lb_netlifly     = get_option( 'gatsby_toolkit' );
 $has_prod_hook  = (bool) $lb_netlifly['production_buildhook'];
 $has_stage_hook = (bool) $lb_netlifly['stage_buildhook'];
 
@@ -21,7 +21,6 @@ $is_classic_editor    = is_plugin_active( 'classic-editor/classic-editor.php' );
 
 <div id="submitpost" class="post-box submitbox">
 	<div id="lb-publishing-action">
-
 		<?php if ( ! in_array( $post->post_status, array( 'publish', 'future', 'private', 'lbn-update' ) ) || 0 === $post->ID ) : ?>
 
 			<?php if ( $can_publish ) : ?>

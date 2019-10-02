@@ -2,11 +2,11 @@
 /**
  * Renders publish major publishing elements
  *
- * @package littlebot_netlifly/views
+ * @package gatsby_toolkit/views
  */
 
 if ( $has_prod_hook || $has_stage_hook ) : ?>
-	<h4 style="margin-bottom: 0;"><?php esc_html_e( 'Publish to', 'lbn-netlifly' ); ?>:</h4>
+	<h4 style="margin-bottom: 0;"><?php esc_html_e( 'Publish to', 'gatsbby-toolkit' ); ?>:</h4>
 	<?php if ( $has_stage_hook ) : ?>
 		<div><label><input data-env="stage" type="checkbox" name="lbn_published_stage" <?php if ( $published_stage ) : ?>checked<?php endif; ?>>Stage</label></div>
 	<?php endif; ?>
@@ -16,10 +16,10 @@ if ( $has_prod_hook || $has_stage_hook ) : ?>
 <?php else : ?>
 	<div class="no-hooks">
 		<?php
-			$url = get_site_url() . '/wp-admin/options-general.php?page=lb-netlifly';
+			$url = get_site_url() . '/wp-admin/options-general.php?page=gatsby-toolkit';
 			printf(
 				/* translators: %1 <a> open tag %2 close tag :  */
-				esc_html__( 'Oops, you need to %1$sset a production or stage build hook%2$s for this plugin to work.', 'lb-netlifly' ),
+				esc_html__( 'Oops, you need to %1$sset a production or stage build hook%2$s for this plugin to work.', 'gatsby-toolkit' ),
 				'<a href=' . esc_attr( $url ) . '>',
 				'</a>'
 			);

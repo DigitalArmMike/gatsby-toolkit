@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Post Metabox.
  */
-class LBN_Assets {
+class GT_Assets {
 
 	/**
 	 * Parent plugin class.
@@ -50,8 +50,8 @@ class LBN_Assets {
 	 * @return void
 	 */
 	public function enqueue_scripts_styles() {
-		wp_enqueue_style( 'lbn-styles', $this->plugin->url . '/assets/littlebot-netlifly.css', array(), $this->plugin->__get( 'version' ), false );
-		wp_enqueue_script( 'lbn-scripts', $this->plugin->url . '/assets/littlebot-netlifly.js', array(), $this->plugin->__get( 'version' ), true );
+		wp_enqueue_style( 'gatsby-toolkit-styles', $this->plugin->url . '/assets/littlebot-netlifly.css', array(), $this->plugin->__get( 'version' ), false );
+		wp_enqueue_script( 'gatsby-toolkit-scripts', $this->plugin->url . '/assets/littlebot-netlifly.js', array(), $this->plugin->__get( 'version' ), true );
 	}
 
 }

@@ -1,19 +1,19 @@
 <?php
 /**
- * Plugin Name: WP Buildhook Deploy
+ * Plugin Name: Gatsby Toolkit
  * Plugin URI:  https://www.justinwhall.com
- * Description: Trigger buildhooks & deploy your static site on post publish, update, delete etc.
+ * Description: A toolkit for your Gatsby Powered WordPress site. Build, deploy & connect.
  * Version:     0.9.2
  * Author:      Justin W Hall
  * Author URI:  https://www.justinwhall.com
  * Donate link: https://www.justinwhall.com
  * License:     GPLv2
- * Text Domain: littlebot-netlify
+ * Text Domain: gatsby-toolkit
  * Domain Path: /languages
  *
  * @link    https://www.justinwhall.com
  *
- * @package Littlebot_netlify
+ * @package gatsby_toolkit
  * @version 0.9.2
  *
  * Copyright (c) 2018 Justin W Hall (email : justinwhall@me.com)
@@ -40,21 +40,21 @@
  * @param  string $class_name Name of the class being requested.
  * @return void
  */
-function littlebot_netlify_autoload_classes( $class_name ) {
-	if ( 0 !== strpos( $class_name, 'LBN_' ) ) {
+function gatsby_toolkit_autoload_classes( $class_name ) {
+	if ( 0 !== strpos( $class_name, 'GT_' ) ) {
 		return;
 	}
 	$filename = strtolower(
 		str_replace(
 			'_',
 			'-',
-			substr( $class_name, strlen( 'LBN_' ) )
+			substr( $class_name, strlen( 'GT_' ) )
 		)
 	);
-	$filename = 'class-lbn-' . $filename;
-	Littlebot_Netlify::include_file( 'includes/' . $filename );
+	$filename = 'class-' . $filename;
+	Gatsby_Toolkit::include_file( 'includes/' . $filename );
 }
-spl_autoload_register( 'littlebot_netlify_autoload_classes' );
+spl_autoload_register( 'gatsby_toolkit_autoload_classes' );
 
 
 /**
@@ -62,7 +62,7 @@ spl_autoload_register( 'littlebot_netlify_autoload_classes' );
  *
  * @since  0.9.0
  */
-final class Littlebot_Netlify {
+final class Gatsby_Toolkit {
 
 	/**
 	 * Current version.
@@ -107,7 +107,7 @@ final class Littlebot_Netlify {
 	/**
 	 * Singleton instance of plugin.
 	 *
-	 * @var    Littlebot_netlify
+	 * @var    gatsby_toolkit
 	 * @since  0.9.0
 	 */
 	protected static $single_instance = null;
@@ -116,7 +116,7 @@ final class Littlebot_Netlify {
 	 * Creates or returns an instance of this class.
 	 *
 	 * @since   0.9.0
-	 * @return  Littlebot_netlify A single instance of this class.
+	 * @return  gatsby_toolkit A single instance of this class.
 	 */
 	public static function get_instance() {
 		if ( null === self::$single_instance ) {
@@ -144,11 +144,11 @@ final class Littlebot_Netlify {
 	 * @since  0.9.0
 	 */
 	public function includes() {
-		new LBN_Assets( $this );
-		new LBN_Settings( $this );
-		new LBN_Meta_Fields( $this );
-		new LBN_Metaboxes( $this );
-		new LBN_Post( $this );
+		new GT_Assets( $this );
+		new GT_Settings( $this );
+		new GT_Meta_Fields( $this );
+		new GT_Metaboxes( $this );
+		new GT_Post( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
 
 	/**
@@ -369,19 +369,19 @@ final class Littlebot_Netlify {
 }
 
 /**
- * Grab the Littlebot_netlify object and return it.
- * Wrapper for Littlebot_netlify::get_instance().
+ * Grab the gatsby_toolkit object and return it.
+ * Wrapper for gatsby_toolkit::get_instance().
  *
  * @since  0.9.0
- * @return Littlebot_netlify  Singleton instance of plugin class.
+ * @return gatsby_toolkit  Singleton instance of plugin class.
  */
-function littlebot_netlify() {
-	return Littlebot_Netlify::get_instance();
+function gatsby_toolkit() {
+	return Gatsby_Toolkit::get_instance();
 }
 
 // Kick it off.
-add_action( 'plugins_loaded', array( littlebot_netlify(), 'hooks' ) );
+add_action( 'plugins_loaded', array( gatsby_toolkit(), 'hooks' ) );
 
 // Activation and deactivation.
-register_activation_hook( __FILE__, array( littlebot_netlify(), '_activate' ) );
-register_deactivation_hook( __FILE__, array( littlebot_netlify(), '_deactivate' ) );
+register_activation_hook( __FILE__, array( gatsby_toolkit(), '_activate' ) );
+register_deactivation_hook( __FILE__, array( gatsby_toolkit(), '_deactivate' ) );

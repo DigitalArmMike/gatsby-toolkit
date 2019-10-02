@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Intetfaces with Netlifly API
  */
-class LBN_Netlifly {
+class GT_Netlifly {
 
 	/**
 	 * Plugin settings.
@@ -39,7 +39,7 @@ class LBN_Netlifly {
 	 * @param string $env The environment we are going to deplo to.
 	 */
 	function __construct( $env ) {
-		$this->settings = get_option( 'lb_netlifly' );
+		$this->settings = get_option( 'gatsby_toolkit' );
 		$this->build_hook_url = $this->get_build_hook( $env );
 	}
 

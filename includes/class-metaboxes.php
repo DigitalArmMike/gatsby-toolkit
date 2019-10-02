@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Post Metabox.
  */
-class LBN_Metaboxes {
+class GT_Metaboxes {
 
 	/**
 	 * Parent plugin class.
@@ -64,8 +64,8 @@ class LBN_Metaboxes {
 	 */
 	public function add_publish_box() {
 		add_meta_box(
-			'lb_netlifly',
-			__( 'Netlify', 'littlebot-netlify' ),
+			'gatsby_toolkit',
+			__( 'Deploy', 'gatsby-toolkit' ),
 			array( $this, 'render_meta_box_content' ),
 			array( 'post', 'page' ),
 			'side',

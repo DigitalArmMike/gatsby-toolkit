@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Hooks saving and updating posts.
  */
-class LBN_Post {
+class GT_Post {
 
 	/**
 	 * Parent plugin class.
@@ -60,7 +60,7 @@ class LBN_Post {
 		return array_merge(
 			$columns,
 			array(
-				'Published' => __( 'Published', 'lb-netlifly' ),
+				'Published' => __( 'Published', 'gatsby-toolkit' ),
 			)
 		);
 	}
@@ -78,11 +78,11 @@ class LBN_Post {
 		$prod_status = (bool) get_post_meta( $post_id, 'lbn_published_production', true );
 
 		if ( $prod_status ) {
-			echo sprintf( '<div>%s</div>', esc_html( 'Production', 'lb-netlifly' ) );
+			echo sprintf( '<div>%s</div>', esc_html( 'Production', 'gatsby-toolkit' ) );
 		}
 
 		if ( $stage_status ) {
-			echo sprintf( '<div>%s</div>', esc_html( 'Stage', 'lb-netlifly' ) );
+			echo sprintf( '<div>%s</div>', esc_html( 'Stage', 'gatsby-toolkit' ) );
 		}
 
 		if ( ! $stage_status && ! $prod_status ) {
@@ -124,7 +124,7 @@ class LBN_Post {
 	 * @return void
 	 */
 	public function save_post( $post_id, $post, $update ) {
-		LBN_POST::update( $post );
+		GT_POST::update( $post );
 	}
 
 	/**
@@ -135,7 +135,7 @@ class LBN_Post {
 	 */
 	public function trash_post( $post_id ) {
 		$post = get_post( $post_id );
-		LBN_POST::update( $post );
+		GT_POST::update( $post );
 	}
 
 	/**
@@ -153,7 +153,7 @@ class LBN_Post {
 			return;
 		}
 
-		$lb_netlifly     = get_option( 'lb_netlifly' );
+		$lb_netlifly     = get_option( 'gatsby_toolkit' );
 		$has_stage_hook = (bool) $lb_netlifly['stage_buildhook'];
 		$has_prod_hook  = (bool) $lb_netlifly['production_buildhook'];
 
@@ -164,14 +164,14 @@ class LBN_Post {
 		// Stage.
 		if ( $has_stage_hook ) {
 			update_post_meta( $post->ID, 'lbn_published_stage', $published_stage );
-			$netlifly_stage = new LBN_Netlifly( 'stage' );
+			$netlifly_stage = new GT_Netlifly( 'stage' );
 			$netlifly_stage->call_build_hook();
 		}
 
 		// Prod.
 		if ( $has_prod_hook ) {
 			update_post_meta( $post->ID, 'lbn_published_production', $published_production );
-			$netlifly_stage = new LBN_Netlifly( 'production' );
+			$netlifly_stage = new GT_Netlifly( 'production' );
 			$netlifly_stage->call_build_hook();
 		}
 	}

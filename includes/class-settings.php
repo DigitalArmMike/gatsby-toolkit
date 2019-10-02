@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Settings & Settings page
  */
-class LBN_Settings {
+class GT_Settings {
 	/**
 	 * Plugin options.
 	 *
@@ -39,9 +39,9 @@ class LBN_Settings {
 	public function add_plugin_page() {
 		add_options_page(
 			'Settings Admin',
-			'WP Buildhook Deploy',
+			'Gatsby Toolkit',
 			'manage_options',
-			'lb-netlifly',
+			'gatsby-toolkit',
 			array( $this, 'create_admin_page' )
 		);
 	}
@@ -53,16 +53,16 @@ class LBN_Settings {
 	 */
 	public function create_admin_page() {
 		// Set class property.
-		$this->options = get_option( 'lb_netlifly' );
+		$this->options = get_option( 'gatsby_toolkit' );
 
 		?>
 		<div class="wrap">
-			<h1>WP Buildhook Deploy Settings</h1>
+			<h1>WGatsby Toolkit</h1>
 			<form method="post" action="options.php">
 			<?php
 				// This prints out all hidden setting fields.
 				settings_fields( 'build_group' );
-				do_settings_sections( 'lb-netlifly' );
+				do_settings_sections( 'gatsby-toolkit' );
 				submit_button();
 			?>
 			</form>
@@ -78,7 +78,7 @@ class LBN_Settings {
 	public function page_init() {
 		register_setting(
 			'build_group',
-			'lb_netlifly',
+			'gatsby_toolkit',
 			array( $this, 'sanitize' )
 		);
 
@@ -86,14 +86,14 @@ class LBN_Settings {
 			'setting_section_id',
 			'Build Hooks',
 			false,
-			'lb-netlifly'
+			'gatsby-toolkit'
 		);
 
 		add_settings_field(
 			'production_buildhook',
 			'Production',
 			array( $this, 'prod_callback' ),
-			'lb-netlifly',
+			'gatsby-toolkit',
 			'setting_section_id'
 		);
 
@@ -101,7 +101,7 @@ class LBN_Settings {
 			'stage_buildhook',
 			'Stage',
 			array( $this, 'stage_callback' ),
-			'lb-netlifly',
+			'gatsby-toolkit',
 			'setting_section_id'
 		);
 	}
@@ -131,7 +131,7 @@ class LBN_Settings {
 	 */
 	public function prod_callback() {
 		printf(
-			'<input type="text" id="prod_buildhook" name="lb_netlifly[production_buildhook]" value="%s" style="min-width:450px;"/>',
+			'<input type="text" id="prod_buildhook" name="gatsby_toolkit[production_buildhook]" value="%s" style="min-width:450px;"/>',
 			isset( $this->options['production_buildhook'] ) ? esc_attr( $this->options['production_buildhook'] ) : ''
 		);
 	}
@@ -143,7 +143,7 @@ class LBN_Settings {
 	 */
 	public function stage_callback() {
 		printf(
-			'<input type="text" id="stage_buildhook" name="lb_netlifly[stage_buildhook]" value="%s" style="min-width:450px;" />',
+			'<input type="text" id="stage_buildhook" name="gatsby_toolkit[stage_buildhook]" value="%s" style="min-width:450px;" />',
 			isset( $this->options['stage_buildhook'] ) ? esc_attr( $this->options['stage_buildhook'] ) : ''
 		);
 	}
