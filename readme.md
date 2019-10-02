@@ -9,13 +9,13 @@ Connect your WordPress website to [Netlify](https://www.netlify.com/) (or any se
 - Download or clone repository
 - Move `gatsby-toolkit` to your plugins directory or zip and upload
 - Activate plugin
-- Add at least one buildhook URL to the setings page `Settings > WP BuildHook Deploy`
+- Add at least one buildhook URL to the setings page `Settings > Gatsby Toolkit`
 
 ### Using Netlify? (It's awesome BTW)
 
 - Create at least one site at Netlify
 - [Create a build hook](https://www.netlify.com/docs/webhooks/) for each site (or just one if you're just using one site)
-- Add build hook to the `Settings > WP BuildHook Deploy`
+- Add build hook to the `Settings > Gatsby Toolkit`
 - Your WordPress site will call your build hook(s) when publishing, updating or deleting a post
 
 ## Getting started with Gatsby?

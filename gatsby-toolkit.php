@@ -3,7 +3,7 @@
  * Plugin Name: Gatsby Toolkit
  * Plugin URI:  https://www.justinwhall.com
  * Description: A toolkit for your Gatsby Powered WordPress site. Build, deploy & connect.
- * Version:     0.9.2
+ * Version:     0.9.4
  * Author:      Justin W Hall
  * Author URI:  https://www.justinwhall.com
  * Donate link: https://www.justinwhall.com
@@ -14,7 +14,7 @@
  * @link    https://www.justinwhall.com
  *
  * @package gatsby_toolkit
- * @version 0.9.2
+ * @version 0.9.4
  *
  * Copyright (c) 2018 Justin W Hall (email : justinwhall@me.com)
  *
