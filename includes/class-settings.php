@@ -57,7 +57,7 @@ class GT_Settings {
 
 		?>
 		<div class="wrap">
-			<h1>WGatsby Toolkit</h1>
+			<h1>Gatsby Toolkit</h1>
 			<form method="post" action="options.php">
 			<?php
 				// This prints out all hidden setting fields.
@@ -84,23 +84,15 @@ class GT_Settings {
 
 		add_settings_section(
 			'setting_section_id',
-			'Build Hooks',
+			false,
 			false,
 			'gatsby-toolkit'
 		);
 
 		add_settings_field(
 			'production_buildhook',
-			'Production',
+			'Build Hook',
 			array( $this, 'prod_callback' ),
-			'gatsby-toolkit',
-			'setting_section_id'
-		);
-
-		add_settings_field(
-			'stage_buildhook',
-			'Stage',
-			array( $this, 'stage_callback' ),
 			'gatsby-toolkit',
 			'setting_section_id'
 		);
@@ -115,10 +107,6 @@ class GT_Settings {
 		$new_input = array();
 		if ( isset( $input['production_buildhook'] ) ) {
 			$new_input['production_buildhook'] = sanitize_text_field( $input['production_buildhook'] );
-		}
-
-		if ( isset( $input['stage_buildhook'] ) ) {
-			$new_input['stage_buildhook'] = sanitize_text_field( $input['stage_buildhook'] );
 		}
 
 		return $new_input;
@@ -136,15 +124,4 @@ class GT_Settings {
 		);
 	}
 
-	/**
-	 * Renders stage input option.
-	 *
-	 * @return void
-	 */
-	public function stage_callback() {
-		printf(
-			'<input type="text" id="stage_buildhook" name="gatsby_toolkit[stage_buildhook]" value="%s" style="min-width:450px;" />',
-			isset( $this->options['stage_buildhook'] ) ? esc_attr( $this->options['stage_buildhook'] ) : ''
-		);
-	}
 }

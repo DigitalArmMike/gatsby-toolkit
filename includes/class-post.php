@@ -154,23 +154,10 @@ class GT_Post {
 		}
 
 		$lb_netlifly     = get_option( 'gatsby_toolkit' );
-		$has_stage_hook = (bool) $lb_netlifly['stage_buildhook'];
 		$has_prod_hook  = (bool) $lb_netlifly['production_buildhook'];
-
-		// Is this post published.
-		$published_stage      = isset( $_POST['lbn_published_stage'] ) ? true : false;
-		$published_production = isset( $_POST['lbn_published_production'] ) ? true : false;
-
-		// Stage.
-		if ( $has_stage_hook ) {
-			update_post_meta( $post->ID, 'lbn_published_stage', $published_stage );
-			$netlifly_stage = new GT_Netlifly( 'stage' );
-			$netlifly_stage->call_build_hook();
-		}
 
 		// Prod.
 		if ( $has_prod_hook ) {
-			update_post_meta( $post->ID, 'lbn_published_production', $published_production );
 			$netlifly_stage = new GT_Netlifly( 'production' );
 			$netlifly_stage->call_build_hook();
 		}

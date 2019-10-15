@@ -146,8 +146,6 @@ final class Gatsby_Toolkit {
 	public function includes() {
 		new GT_Assets( $this );
 		new GT_Settings( $this );
-		new GT_Meta_Fields( $this );
-		new GT_Metaboxes( $this );
 		new GT_Post( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
 
@@ -176,16 +174,15 @@ final class Gatsby_Toolkit {
 		}
 
 		// If we already have options, don't create defaults.
-		if ( get_option( 'lb_netlifly' ) ) {
+		if ( get_option( 'gatsby-toolkit' ) ) {
 			return;
 		}
 
 		$options = array(
-			'production_buildhook' => '',
-			'stage_buildhook'      => '',
+			'buildhook' => '',
 		);
 
-		update_option( 'lb_netlifly', $options );
+		update_option( 'gatsby-toolkit', $options );
 
 		// Make sure any rewrite functionality has been loaded.
 		flush_rewrite_rules();
@@ -214,7 +211,7 @@ final class Gatsby_Toolkit {
 		}
 
 		// Load translated strings for plugin.
-		load_plugin_textdomain( 'littlebot-netlify', false, dirname( $this->basename ) . '/languages/' );
+		load_plugin_textdomain( 'gatsby-toolkit', false, dirname( $this->basename ) . '/languages/' );
 
 		// Initialize plugin classes.
 		$this->includes();
@@ -282,7 +279,7 @@ final class Gatsby_Toolkit {
 
 		// Compile default message.
 		/* translators: %s: Admin URL */
-		$default_message = sprintf( __( 'littlebot-netlify is missing requirements and has been <a href="%s">deactivated</a>. Please make sure all requirements are available.', 'littlebot-netlify' ), admin_url( 'plugins.php' ) );
+		$default_message = sprintf( __( 'Gatsby Toolkit is missing requirements and has been <a href="%s">deactivated</a>. Please make sure all requirements are available.', 'gatsby-toolkit' ), admin_url( 'plugins.php' ) );
 
 		// Default details to null.
 		$details = null;
