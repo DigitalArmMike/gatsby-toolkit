@@ -29,6 +29,7 @@ class GT_Settings {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
 		add_action( 'admin_init', array( $this, 'page_init' ) );
+		add_action( 'admin_notices', array( $this, 'maybe_show_no_hooks_notice' ) );
 	}
 
 	/**
@@ -121,6 +122,31 @@ class GT_Settings {
 		printf(
 			'<input type="text" id="prod_buildhook" name="gatsby_toolkit[production_buildhook]" value="%s" style="min-width:450px;"/>',
 			isset( $this->options['production_buildhook'] ) ? esc_attr( $this->options['production_buildhook'] ) : ''
+		);
+	}
+
+	/**
+	 * Show warning if no hooks.
+	 *
+	 * @return void
+	 */
+	public function maybe_show_no_hooks_notice() {
+		$options = get_option( 'gatsby_toolkit' );
+		if ( $options && strlen( $options['production_buildhook'] ) ) {
+			return;
+		}
+
+		$class        = 'notice notice-warning is-dismissible';
+		$message      = __( 'No buildhook added. Your site will not deploy when publishing.', 'gatsby-toolkit' );
+		$link_text    = __( 'You can add on one the options page', 'gatsby-toolkit' );
+		$options_page = get_admin_url() . 'options-general.php?page=gatsby-toolkit';
+
+		printf(
+			'<div class="%1$s"><p>%2$s <a href="%3$s">%4$s</a></p></div>',
+			esc_attr( $class ),
+			esc_html( $message ),
+			esc_html( $options_page ),
+			esc_html( $link_text )
 		);
 	}
 

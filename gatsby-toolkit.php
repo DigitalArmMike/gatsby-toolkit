@@ -1,20 +1,20 @@
 <?php
 /**
  * Plugin Name: Gatsby Toolkit
- * Plugin URI:  https://www.justinwhall.com
+ * Plugin URI:  https://staticfuse.com
  * Description: A toolkit for your Gatsby Powered WordPress site. Build, deploy & connect.
- * Version:     0.9.4
- * Author:      Justin W Hall
- * Author URI:  https://www.justinwhall.com
- * Donate link: https://www.justinwhall.com
+ * Version:     1.0.1
+ * Author:      Static Fuse
+ * Author URI:  https://staticfuse.com
+ * Donate link: https://staticfuse.com
  * License:     GPLv2
  * Text Domain: gatsby-toolkit
  * Domain Path: /languages
  *
- * @link    https://www.justinwhall.com
+ * @link    https://staticfuse.com
  *
  * @package gatsby_toolkit
- * @version 0.9.4
+ * @version 1.0.1
  *
  * Copyright (c) 2018 Justin W Hall (email : justinwhall@me.com)
  *
@@ -174,15 +174,15 @@ final class Gatsby_Toolkit {
 		}
 
 		// If we already have options, don't create defaults.
-		if ( get_option( 'gatsby-toolkit' ) ) {
+		if ( get_option( 'gatsby_toolkit' ) ) {
 			return;
 		}
 
 		$options = array(
-			'buildhook' => '',
+			'production_buildhook' => '',
 		);
 
-		update_option( 'gatsby-toolkit', $options );
+		update_option( 'gatsby_toolkit', $options );
 
 		// Make sure any rewrite functionality has been loaded.
 		flush_rewrite_rules();

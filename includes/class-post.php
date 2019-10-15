@@ -45,49 +45,6 @@ class GT_Post {
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
 		add_action( 'trash_post', array( $this, 'trash_post' ), 10, 1 );
 		add_action( 'wp_insert_post_data', array( $this, 'insert_post' ), 10, 3 );
-		add_action( 'manage_posts_columns', array( $this, 'show_publish_status' ), 10, 3 );
-		add_action( 'manage_posts_custom_column', array( $this, 'build_column' ), 15, 3 );
-	}
-
-	/**
-	 * Add publish column
-	 *
-	 * @param array $columns Post list columns.
-	 *
-	 * @return array
-	 */
-	public function show_publish_status( $columns ) {
-		return array_merge(
-			$columns,
-			array(
-				'Published' => __( 'Published', 'gatsby-toolkit' ),
-			)
-		);
-	}
-
-	/**
-	 * Add columns to invoice and estimates
-	 *
-	 * @param  array $columns post screen columns.
-	 * @param  int   $post_id   the post id.
-	 * @return void
-	 */
-	public function build_column( $columns, $post_id ) {
-
-		$stage_status  = (bool) get_post_meta( $post_id, 'lbn_published_stage', true );
-		$prod_status = (bool) get_post_meta( $post_id, 'lbn_published_production', true );
-
-		if ( $prod_status ) {
-			echo sprintf( '<div>%s</div>', esc_html( 'Production', 'gatsby-toolkit' ) );
-		}
-
-		if ( $stage_status ) {
-			echo sprintf( '<div>%s</div>', esc_html( 'Stage', 'gatsby-toolkit' ) );
-		}
-
-		if ( ! $stage_status && ! $prod_status ) {
-			echo '—';
-		}
 	}
 
 	/**
@@ -153,13 +110,13 @@ class GT_Post {
 			return;
 		}
 
-		$lb_netlifly     = get_option( 'gatsby_toolkit' );
+		$lb_netlifly    = get_option( 'gatsby_toolkit' );
 		$has_prod_hook  = (bool) $lb_netlifly['production_buildhook'];
 
 		// Prod.
 		if ( $has_prod_hook ) {
-			$netlifly_stage = new GT_Netlifly( 'production' );
-			$netlifly_stage->call_build_hook();
+			$netlifly = new GT_Netlifly( 'production' );
+			$netlifly->call_build_hook();
 		}
 	}
 
