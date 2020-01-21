@@ -59,6 +59,19 @@ class GT_Settings {
 		?>
 		<div class="wrap">
 			<h1>Gatsby Toolkit</h1>
+
+			<?php if (! empty($_GET['deploy_production'])) : ?>
+				<div class="notice notice-success">
+					<p>Deploying to production...</p>
+				</div>
+			<?php endif; ?>
+
+			<?php if (! empty($_GET['deploy_staging'])) : ?>
+				<div class="notice notice-success">
+					<p>Deploying to staging...</p>
+				</div>
+			<?php endif; ?>
+
 			<form method="post" action="options.php">
 			<?php
 				// This prints out all hidden setting fields.
@@ -92,8 +105,16 @@ class GT_Settings {
 
 		add_settings_field(
 			'production_buildhook',
-			'Build Hook',
+			'Production Build Hook',
 			array( $this, 'prod_callback' ),
+			'gatsby-toolkit',
+			'setting_section_id'
+		);
+
+		add_settings_field(
+			'staging_buildhook',
+			'Staging Build Hook',
+			array( $this, 'stage_callback' ),
 			'gatsby-toolkit',
 			'setting_section_id'
 		);
@@ -110,6 +131,10 @@ class GT_Settings {
 			$new_input['production_buildhook'] = sanitize_text_field( $input['production_buildhook'] );
 		}
 
+		if ( isset( $input['staging_buildhook'] ) ) {
+			$new_input['staging_buildhook'] = sanitize_text_field( $input['staging_buildhook'] );
+		}
+
 		return $new_input;
 	}
 
@@ -122,6 +147,18 @@ class GT_Settings {
 		printf(
 			'<input type="text" id="prod_buildhook" name="gatsby_toolkit[production_buildhook]" value="%s" style="min-width:450px;"/>',
 			isset( $this->options['production_buildhook'] ) ? esc_attr( $this->options['production_buildhook'] ) : ''
+		);
+	}
+
+	/**
+	 * Renders staging input option.
+	 *
+	 * @return void
+	 */
+	public function stage_callback() {
+		printf(
+			'<input type="text" id="stage_buildhook" name="gatsby_toolkit[staging_buildhook]" value="%s" style="min-width:450px;"/>',
+			isset( $this->options['staging_buildhook'] ) ? esc_attr( $this->options['staging_buildhook'] ) : ''
 		);
 	}
 
