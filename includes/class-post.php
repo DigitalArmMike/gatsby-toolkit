@@ -42,9 +42,9 @@ class GT_Post {
 	 * @return void
 	 */
 	public function hooks() {
-		add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
-		add_action( 'trash_post', array( $this, 'trash_post' ), 10, 1 );
-		add_action( 'wp_insert_post_data', array( $this, 'insert_post' ), 10, 3 );
+		//add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
+		//add_action( 'trash_post', array( $this, 'trash_post' ), 10, 1 );
+		//add_action( 'wp_insert_post_data', array( $this, 'insert_post' ), 10, 3 );
 	}
 
 	/**
