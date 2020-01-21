@@ -147,6 +147,7 @@ final class Gatsby_Toolkit {
 		new GT_Assets( $this );
 		new GT_Settings( $this );
 		new GT_Post( $this );
+		new GT_Deployment( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
 
 	/**
