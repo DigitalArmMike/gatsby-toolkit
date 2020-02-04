@@ -42,9 +42,9 @@ class GT_Post {
 	 * @return void
 	 */
 	public function hooks() {
-		//add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
-		//add_action( 'trash_post', array( $this, 'trash_post' ), 10, 1 );
-		//add_action( 'wp_insert_post_data', array( $this, 'insert_post' ), 10, 3 );
+		add_action( 'save_post', array( $this, 'save_post' ), 10, 3 );
+		add_action( 'trash_post', array( $this, 'trash_post' ), 10, 1 );
+		add_action( 'wp_insert_post_data', array( $this, 'insert_post' ), 10, 3 );
 	}
 
 	/**
@@ -111,11 +111,11 @@ class GT_Post {
 		}
 
 		$lb_netlifly    = get_option( 'gatsby_toolkit' );
-		$has_prod_hook  = (bool) $lb_netlifly['production_buildhook'];
+		$has_staging_hook  = (bool) $lb_netlifly['staging_buildhook'];
 
 		// Prod.
-		if ( $has_prod_hook ) {
-			$netlifly = new GT_Netlifly( 'production' );
+		if ( $has_staging_hook ) {
+			$netlifly = new GT_Netlifly( 'staging' );
 			$netlifly->call_build_hook();
 		}
 	}
